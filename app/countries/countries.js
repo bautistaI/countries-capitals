@@ -46,11 +46,7 @@ angular.module('cncApp.countries', ['ngRoute'])
 		}),
 		cncRequest.getNeighbours($routeParams.country)
 		.then(function(response){
-			console.log(response);
+			// console.log(response);
 			$scope.neighbours = response.data.geonames;
 		})
 }]);
-
-
-
-

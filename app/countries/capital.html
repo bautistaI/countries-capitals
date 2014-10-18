@@ -6,11 +6,8 @@
 	<p>Capital: {{country.capital}}</p>
 	<p>Population of Capital: {{capital.population | number}}</p>
 	<p>
-		Up to 3 neighbors: <span class="neighbours" ng-repeat="neighbour in neighbours | limitTo:3"><a ng-href="#/countries/{{neighbour.countryCode}}/">{{neighbour.countryName}}</a></span>
-
+		<span>{{neighbours.length}}</span> neighbors: <span class="neighbours" ng-repeat="neighbour in neighbours"><a ng-href="#/countries/{{neighbour.countryCode}}/">{{neighbour.countryName}}</a></span>
 	</p>
-
-
 	<div>
 		<img class="map" id='myImage' src="http://www.geonames.org/img/country/250/{{country.countryCode | uppercase}}.png" width="100" height="100" />
 		<img class="flag" ng-src="http://www.geonames.org/flags/x/{{country.countryCode | lowercase}}.gif" width="100" height="50" />
