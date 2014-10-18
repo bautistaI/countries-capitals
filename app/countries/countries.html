@@ -1,0 +1,30 @@
+<div class="jumbotron">
+  <input type="text" class="cncApp-searcher" placeholder="Search countries" ng-model="search" />
+  <div class="container text-center">
+    <div class="countries-table">
+        <table class="country-table table table-striped table-bordered table-condensed">
+            <thead>
+                <tr>
+                    <th class="text-center">Name</th>
+                    <th class="text-center">Country Code</th>
+                    <th class="text-center">Capital</th>
+                    <th class="text-center">Area in SqKm</th>
+                    <th class="text-center">Population</th>
+                    <th class="text-center">Continent</th>
+                </tr>
+            </thead>
+            <tbody ng-repeat="country in countries |filter:search">
+                <tr>
+                    <td>{{country.countryName}}</td>
+                    <td class="country-code"><a ng-href="#/countries/{{country.countryCode}}/">{{country.countryCode}}</td>
+                    <td>{{country.capital}}</td>
+                    <td>{{country.areaInSqKm | number}}</td>
+                    <td>{{country.population | number}}</td>
+                    <td>{{country.continent}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <p><a ng-href="#/home" class="btn btn-primary btn-lg" role="button">Home</a></p>
+  </div>
+</div>

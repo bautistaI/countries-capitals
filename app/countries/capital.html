@@ -1,0 +1,23 @@
+<!-- removed  ng-repeat="capital in capitals" but still can't get the data, even if I'm using the $scope capital-->
+<div class="jumbotron text-center">	
+	<p>Country Name: <span class="country-name">{{country.countryName}}</span></p> 
+	<p>Population of Country: <span>{{country.population | number}}</span></p>	
+	<p>Area: {{country.areaInSqKm | number}} square km</p>
+	<p>Capital: {{country.capital}}</p>
+	<p>Population of Capital: {{capital.population | number}}</p>
+	<p>
+		Up to 3 neighbors: <span class="neighbours" ng-repeat="neighbour in neighbours | limitTo:3"><a ng-href="#/countries/{{neighbour.countryCode}}/">{{neighbour.countryName}}</a></span>
+
+	</p>
+
+
+	<div>
+		<img class="map" id='myImage' src="http://www.geonames.org/img/country/250/{{country.countryCode | uppercase}}.png" width="100" height="100" />
+		<img class="flag" ng-src="http://www.geonames.org/flags/x/{{country.countryCode | lowercase}}.gif" width="100" height="50" />
+	</div>
+	
+	<p>
+		<a ng-href="#/home" class="btn btn-primary btn-lg" role="button">Home</a>
+		<a ng-href="#/countries" class="btn btn-primary btn-lg" role="button">Browse Countries</a>
+	</p>	
+</div>
