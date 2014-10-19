@@ -6,47 +6,40 @@ angular.module('cncApp.countries', ['ngRoute'])
   $routeProvider
   .when('/countries', {
   templateUrl : 'countries/countries.html',
-  controller : 'CountriesCtrl'
+  controller : 'CountriesCtrl',
+  resolve: {
+  // Gets a list of all countries if the promise is successful
+  countries: function(cncRequest){
+  return cncRequest.getCountries();
+  }
+  }
   })
   .when('/countries/:country', {
 	templateUrl : 'countries/capital.html',
 	controller : 'CapitalCtrl',
+	resolve: {
+	// *** use  $route.current.params.keyValue   instead. The $routeParams is updated only after a route is changed *** 
+	// gets info one the clicked country (country name, population, area, capital, population of capital, and neighbours)
+  country: function($route, cncRequest){
+  return cncRequest.getCountry($route.current.params.country);
+  },
+  capital: function($route, cncRequest){
+  return cncRequest.getCapital($route.current.params.country);
+  },
+  neighbours: function($route, cncRequest){
+  return cncRequest.getNeighbours($route.current.params.country);
+  }
+  }
   })
   .when('/error', {
   template: '<p>Error page Not Found</p>'
   });
 }])
-.controller('CountriesCtrl', ['$scope', 'cncRequest',
-	function($scope, cncRequest){
-	$scope.loadCountries = function(data){
-		cncRequest.getCountries(data)
-		.then(function(response){
-				var countryArray = response.data.geonames;
-				//console.log(JSON.stringify(countryArray));
-				$scope.countries = countryArray;
-			},
-			function(response){
-				// error message
-			}
-		);
-	};
-	$scope.loadCountries();
+.controller('CountriesCtrl', ['$scope', 'countries', function($scope, countries){
+	$scope.countries = countries;
 }])
-.controller('CapitalCtrl', ['$scope', '$routeParams', 'cncRequest',
-	function($scope, $routeParams, cncRequest){
-		cncRequest.getCountry($routeParams.country)
-		.then(function(response){
-			//console.log(response);
-			$scope.country = response.data.geonames[0];
-			//console.log(capital);
-		}),
-		cncRequest.getCapital($routeParams.country)
-		.then(function(response){
-			$scope.capital = response.data.geonames[0];
-		}),
-		cncRequest.getNeighbours($routeParams.country)
-		.then(function(response){
-			// console.log(response);
-			$scope.neighbours = response.data.geonames;
-		})
+.controller('CapitalCtrl', ['$scope', 'country', 'capital', 'neighbours', function($scope, country, capital, neighbours){
+	$scope.country = country;
+	$scope.capital = capital;
+	$scope.neighbours = neighbours;
 }]);
