@@ -94,6 +94,15 @@ tr, td{
   margin: 13px;
 }
 
+.info-container{
+  width: 50%;
+  border: 2px solid #9D9696;
+  margin: 0 auto;
+  border-radius: 10px;
+  padding-bottom: 40px;
+  background-color: #FFF;
+}
+
 .map{
  margin-right: 40px;
 }

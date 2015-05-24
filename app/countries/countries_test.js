@@ -1,12 +1,12 @@
 'use strict';
 
-describe('cncApp.countries module', function() {
+describe('cncApp.countries', function() {
 
   beforeEach(module('cncApp.countries'));
 
-  describe('countries controller', function(){
+  describe('CountriesCtrl', function(){
 
-    it('should ....', inject(function($controller) {
+    it('should return a query to get countries', inject(function($controller) {
       //spec body
       var countriesCtrl = $controller('CountriesCtrl');
       expect(CountriesCtrl).toBeDefined();
